@@ -16,7 +16,7 @@
 
 package androidx.appcompat.view;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.view.ActionMode;
@@ -25,8 +25,7 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.annotation.RestrictTo;
-import androidx.appcompat.view.menu.MenuItemWrapperICS;
-import androidx.appcompat.view.menu.MenuWrapperICS;
+import androidx.appcompat.view.menu.MenuWrapperFactory;
 import androidx.collection.SimpleArrayMap;
 import androidx.core.internal.view.SupportMenu;
 import androidx.core.internal.view.SupportMenuItem;
@@ -35,11 +34,11 @@ import java.util.ArrayList;
 
 /**
  * Wraps a support {@link androidx.appcompat.view.ActionMode} as a framework
- * {@link android.view.ActionMode}.
+ * {@link ActionMode}.
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class SupportActionModeWrapper extends ActionMode {
 
     final Context mContext;
@@ -83,7 +82,7 @@ public class SupportActionModeWrapper extends ActionMode {
 
     @Override
     public Menu getMenu() {
-        return new MenuWrapperICS(mContext, (SupportMenu) mWrappedObject.getMenu());
+        return MenuWrapperFactory.wrapSupportMenu(mContext, (SupportMenu) mWrappedObject.getMenu());
     }
 
     @Override
@@ -139,7 +138,7 @@ public class SupportActionModeWrapper extends ActionMode {
     /**
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public static class CallbackWrapper implements androidx.appcompat.view.ActionMode.Callback {
         final Callback mWrappedCallback;
         final Context mContext;
@@ -170,7 +169,7 @@ public class SupportActionModeWrapper extends ActionMode {
         public boolean onActionItemClicked(androidx.appcompat.view.ActionMode mode,
                 android.view.MenuItem item) {
             return mWrappedCallback.onActionItemClicked(getActionModeWrapper(mode),
-                    new MenuItemWrapperICS(mContext, (SupportMenuItem) item));
+                    MenuWrapperFactory.wrapSupportMenuItem(mContext, (SupportMenuItem) item));
         }
 
         @Override
@@ -181,7 +180,7 @@ public class SupportActionModeWrapper extends ActionMode {
         private Menu getMenuWrapper(Menu menu) {
             Menu wrapper = mMenus.get(menu);
             if (wrapper == null) {
-                wrapper = new MenuWrapperICS(mContext, (SupportMenu) menu);
+                wrapper = MenuWrapperFactory.wrapSupportMenu(mContext, (SupportMenu) menu);
                 mMenus.put(menu, wrapper);
             }
             return wrapper;

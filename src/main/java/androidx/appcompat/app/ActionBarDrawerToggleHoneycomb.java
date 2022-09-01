@@ -46,9 +46,11 @@ class ActionBarDrawerToggleHoneycomb {
             R.attr.homeAsUpIndicator
     };
 
-    public static SetIndicatorInfo setActionBarUpIndicator(Activity activity,
+    public static SetIndicatorInfo setActionBarUpIndicator(SetIndicatorInfo info, Activity activity,
             Drawable drawable, int contentDescRes) {
-        SetIndicatorInfo info = new SetIndicatorInfo(activity);
+        if (true || info == null) {
+            info = new SetIndicatorInfo(activity);
+        }
         if (info.setHomeAsUpIndicator != null) {
             try {
                 final ActionBar actionBar = activity.getActionBar();
@@ -111,7 +113,7 @@ class ActionBarDrawerToggleHoneycomb {
                 // Oh well. We'll use the other mechanism below instead.
             }
 
-            final View home = activity.findViewById(android.R.id.home);
+            final View home = activity.findViewById(R.id.home);
             if (home == null) {
                 // Action bar doesn't have a known configuration, an OEM messed with things.
                 return;
@@ -126,7 +128,7 @@ class ActionBarDrawerToggleHoneycomb {
 
             final View first = parent.getChildAt(0);
             final View second = parent.getChildAt(1);
-            final View up = first.getId() == android.R.id.home ? second : first;
+            final View up = first.getId() == R.id.home ? second : first;
 
             if (up instanceof ImageView) {
                 // Jackpot! (Probably...)

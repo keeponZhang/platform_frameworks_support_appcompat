@@ -55,7 +55,7 @@ public class AppCompatRatingBar extends RatingBar {
     protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        Bitmap sampleTile = mAppCompatProgressBarHelper.getSampleTile();
+        Bitmap sampleTile = mAppCompatProgressBarHelper.getSampleTime();
         if (sampleTile != null) {
             final int width = sampleTile.getWidth() * getNumStars();
             setMeasuredDimension(View.resolveSizeAndState(width, widthMeasureSpec, 0),

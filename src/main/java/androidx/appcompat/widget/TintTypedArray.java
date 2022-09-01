@@ -16,7 +16,7 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -36,12 +36,12 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
 
 /**
- * A class that wraps a {@link android.content.res.TypedArray} and provides the same public API
+ * A class that wraps a {@link TypedArray} and provides the same public API
  * surface. The purpose of this class is so that we can intercept calls to new APIs.
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class TintTypedArray {
 
     private final Context mContext;

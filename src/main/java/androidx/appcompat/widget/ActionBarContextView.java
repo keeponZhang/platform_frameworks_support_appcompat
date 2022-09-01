@@ -16,7 +16,7 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -37,7 +37,7 @@ import androidx.core.view.ViewCompat;
 /**
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class ActionBarContextView extends AbsActionBarView {
     private static final String TAG = "ActionBarContextView";
 
@@ -227,14 +227,14 @@ public class ActionBarContextView extends AbsActionBarView {
     }
 
     @Override
-    protected ViewGroup.LayoutParams generateDefaultLayoutParams() {
+    protected LayoutParams generateDefaultLayoutParams() {
         // Used by custom views if they don't supply layout params. Everything else
         // added to an ActionBarContextView should have them already.
         return new MarginLayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 
     @Override
-    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
         return new MarginLayoutParams(getContext(), attrs);
     }
 
@@ -289,7 +289,7 @@ public class ActionBarContextView extends AbsActionBarView {
         }
 
         if (mCustomView != null) {
-            ViewGroup.LayoutParams lp = mCustomView.getLayoutParams();
+            LayoutParams lp = mCustomView.getLayoutParams();
             final int customWidthMode = lp.width != LayoutParams.WRAP_CONTENT ?
                     MeasureSpec.EXACTLY : MeasureSpec.AT_MOST;
             final int customWidth = lp.width >= 0 ?

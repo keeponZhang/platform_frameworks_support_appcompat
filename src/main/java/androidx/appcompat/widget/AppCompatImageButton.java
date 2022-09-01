@@ -16,7 +16,7 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -131,7 +131,7 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     public void setSupportBackgroundTintList(@Nullable ColorStateList tint) {
         if (mBackgroundTintHelper != null) {
@@ -145,7 +145,7 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     @Nullable
     public ColorStateList getSupportBackgroundTintList() {
@@ -159,7 +159,7 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     public void setSupportBackgroundTintMode(@Nullable PorterDuff.Mode tintMode) {
         if (mBackgroundTintHelper != null) {
@@ -173,7 +173,7 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     @Nullable
     public PorterDuff.Mode getSupportBackgroundTintMode() {
@@ -182,11 +182,11 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
     }
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.ImageViewCompat#setImageTintList(ImageView, ColorStateList)}
+     * {@link ImageViewCompat#setImageTintList(ImageView, ColorStateList)}
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     public void setSupportImageTintList(@Nullable ColorStateList tint) {
         if (mImageHelper != null) {
@@ -196,11 +196,11 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.ImageViewCompat#getImageTintList(ImageView)}
+     * {@link ImageViewCompat#getImageTintList(ImageView)}
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     @Nullable
     public ColorStateList getSupportImageTintList() {
@@ -210,11 +210,11 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.ImageViewCompat#setImageTintMode(ImageView, PorterDuff.Mode)}
+     * {@link ImageViewCompat#setImageTintMode(ImageView, PorterDuff.Mode)}
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     public void setSupportImageTintMode(@Nullable PorterDuff.Mode tintMode) {
         if (mImageHelper != null) {
@@ -224,11 +224,11 @@ public class AppCompatImageButton extends ImageButton implements TintableBackgro
 
     /**
      * This should be accessed via
-     * {@link androidx.core.widget.ImageViewCompat#getImageTintMode(ImageView)}
+     * {@link ImageViewCompat#getImageTintMode(ImageView)}
      *
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     @Override
     @Nullable
     public PorterDuff.Mode getSupportImageTintMode() {

@@ -16,7 +16,7 @@
 
 package androidx.appcompat.view.menu;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -51,12 +51,12 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Implementation of the {@link androidx.core.internal.view.SupportMenu} interface for creating a
+ * Implementation of the {@link SupportMenu} interface for creating a
  * standard menu UI.
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class MenuBuilder implements SupportMenu {
 
     private static final String TAG = "MenuBuilder";
@@ -197,7 +197,7 @@ public class MenuBuilder implements SupportMenu {
      * @hide
      */
 
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public interface Callback {
 
         /**
@@ -221,7 +221,7 @@ public class MenuBuilder implements SupportMenu {
      * Called by menu items to execute their associated action
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public interface ItemInvoker {
         boolean invokeItem(MenuItemImpl item);
     }

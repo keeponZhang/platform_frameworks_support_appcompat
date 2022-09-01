@@ -16,7 +16,7 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -35,11 +35,11 @@ import java.lang.ref.WeakReference;
 
 /**
  * Backport of {@link android.view.ViewStub} so that we can set the
- * {@link android.view.LayoutInflater} on devices before Jelly Bean.
+ * {@link LayoutInflater} on devices before Jelly Bean.
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public final class ViewStubCompat extends View {
     private int mLayoutResource = 0;
     private int mInflatedId;
@@ -195,7 +195,7 @@ public final class ViewStubCompat extends View {
     public View inflate() {
         final ViewParent viewParent = getParent();
 
-        if (viewParent instanceof ViewGroup) {
+        if (viewParent != null && viewParent instanceof ViewGroup) {
             if (mLayoutResource != 0) {
                 final ViewGroup parent = (ViewGroup) viewParent;
                 final LayoutInflater factory;

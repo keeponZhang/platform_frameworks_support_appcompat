@@ -16,16 +16,19 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.ActionMode;
+import android.widget.TextView;
 
 import androidx.annotation.RestrictTo;
 import androidx.appcompat.R;
+import androidx.core.widget.TextViewCompat;
 
 /**
  * Used by dialogs to change the font size and number of lines to try to fit
@@ -33,8 +36,8 @@ import androidx.appcompat.R;
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
-public class DialogTitle extends AppCompatTextView {
+@RestrictTo(LIBRARY_GROUP)
+public class DialogTitle extends TextView {
 
     public DialogTitle(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -77,5 +80,15 @@ public class DialogTitle extends AppCompatTextView {
                 }
             }
         }
+    }
+
+    /**
+     * See
+     * {@link TextViewCompat#setCustomSelectionActionModeCallback(TextView, ActionMode.Callback)}
+     */
+    @Override
+    public void setCustomSelectionActionModeCallback(ActionMode.Callback actionModeCallback) {
+        super.setCustomSelectionActionModeCallback(TextViewCompat
+                .wrapCustomSelectionActionModeCallback(this, actionModeCallback));
     }
 }

@@ -16,7 +16,7 @@
 
 package androidx.appcompat.view.menu;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +39,7 @@ import androidx.core.view.ActionProvider;
 /**
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class ActionMenuItem implements SupportMenuItem {
 
     private final int mId;
@@ -60,7 +60,7 @@ public class ActionMenuItem implements SupportMenuItem {
 
     private Context mContext;
 
-    private SupportMenuItem.OnMenuItemClickListener mClickListener;
+    private OnMenuItemClickListener mClickListener;
 
     private CharSequence mContentDescription;
     private CharSequence mTooltipText;
@@ -318,16 +318,6 @@ public class ActionMenuItem implements SupportMenuItem {
     }
 
     @Override
-    public boolean requiresActionButton() {
-        return true;
-    }
-
-    @Override
-    public boolean requiresOverflow() {
-        return false;
-    }
-
-    @Override
     public SupportMenuItem setActionView(View actionView) {
         throw new UnsupportedOperationException();
     }
@@ -384,7 +374,7 @@ public class ActionMenuItem implements SupportMenuItem {
     }
 
     @Override
-    public MenuItem setOnActionExpandListener(MenuItem.OnActionExpandListener listener) {
+    public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
         throw new UnsupportedOperationException();
     }
 

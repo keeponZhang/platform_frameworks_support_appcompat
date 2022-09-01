@@ -16,7 +16,7 @@
 
 package androidx.appcompat.view.menu;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -48,7 +48,7 @@ import androidx.core.view.ActionProvider;
 /**
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public final class MenuItemImpl implements SupportMenuItem {
 
     private static final String TAG = "MenuItemImpl";
@@ -85,7 +85,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     private SubMenuBuilder mSubMenu;
 
     private Runnable mItemCallback;
-    private SupportMenuItem.OnMenuItemClickListener mClickListener;
+    private OnMenuItemClickListener mClickListener;
 
     private CharSequence mContentDescription;
     private CharSequence mTooltipText;
@@ -108,7 +108,7 @@ public final class MenuItemImpl implements SupportMenuItem {
 
     private View mActionView;
     private ActionProvider mActionProvider;
-    private MenuItem.OnActionExpandListener mOnActionExpandListener;
+    private OnActionExpandListener mOnActionExpandListener;
     private boolean mIsActionViewExpanded = false;
 
     /** Used for the icon resource ID if this item does not have an icon */
@@ -668,7 +668,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     }
 
     @Override
-    public MenuItem setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener clickListener) {
+    public MenuItem setOnMenuItemClickListener(OnMenuItemClickListener clickListener) {
         mClickListener = clickListener;
         return this;
     }
@@ -706,14 +706,8 @@ public final class MenuItemImpl implements SupportMenuItem {
         return (mShowAsAction & SHOW_AS_ACTION_IF_ROOM) == SHOW_AS_ACTION_IF_ROOM;
     }
 
-    @Override
     public boolean requiresActionButton() {
         return (mShowAsAction & SHOW_AS_ACTION_ALWAYS) == SHOW_AS_ACTION_ALWAYS;
-    }
-
-    @Override
-    public boolean requiresOverflow() {
-        return !requiresActionButton() && !requestsActionButton();
     }
 
     public void setIsActionButton(boolean isActionButton) {
@@ -872,7 +866,7 @@ public final class MenuItemImpl implements SupportMenuItem {
     }
 
     @Override
-    public MenuItem setOnActionExpandListener(MenuItem.OnActionExpandListener listener) {
+    public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
         mOnActionExpandListener = listener;
         return this;
     }

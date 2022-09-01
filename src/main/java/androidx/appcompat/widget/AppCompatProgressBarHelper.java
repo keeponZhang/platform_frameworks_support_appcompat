@@ -141,7 +141,7 @@ class AppCompatProgressBarHelper {
         return new RoundRectShape(roundedCorners, null, null);
     }
 
-    Bitmap getSampleTile() {
+    Bitmap getSampleTime() {
         return mSampleTile;
     }
 

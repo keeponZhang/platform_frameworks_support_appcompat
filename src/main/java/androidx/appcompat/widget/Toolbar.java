@@ -16,11 +16,9 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
-import static androidx.annotation.RestrictTo.Scope.TESTS;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
@@ -113,34 +111,33 @@ import java.util.List;
  * toolbars than on their application icon. The use of application icon plus title as a standard
  * layout is discouraged on API 21 devices and newer.</p>
  *
- * {@link androidx.appcompat.R.attr#buttonGravity}
- * {@link androidx.appcompat.R.attr#collapseContentDescription}
- * {@link androidx.appcompat.R.attr#collapseIcon}
- * {@link androidx.appcompat.R.attr#contentInsetEnd}
- * {@link androidx.appcompat.R.attr#contentInsetLeft}
- * {@link androidx.appcompat.R.attr#contentInsetRight}
- * {@link androidx.appcompat.R.attr#contentInsetStart}
- * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
- * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
- * {@link android.R.attr#gravity}
- * {@link androidx.appcompat.R.attr#logo}
- * {@link androidx.appcompat.R.attr#logoDescription}
- * {@link androidx.appcompat.R.attr#maxButtonHeight}
- * {@link androidx.appcompat.R.attr#navigationContentDescription}
- * {@link androidx.appcompat.R.attr#navigationIcon}
- * {@link androidx.appcompat.R.attr#popupTheme}
- * {@link androidx.appcompat.R.attr#subtitle}
- * {@link androidx.appcompat.R.attr#subtitleTextAppearance}
- * {@link androidx.appcompat.R.attr#subtitleTextColor}
- * {@link androidx.appcompat.R.attr#title}
- * {@link androidx.appcompat.R.attr#titleMargin}
- * {@link androidx.appcompat.R.attr#titleMarginBottom}
- * {@link androidx.appcompat.R.attr#titleMarginEnd}
- * {@link androidx.appcompat.R.attr#titleMarginStart}
- * {@link androidx.appcompat.R.attr#titleMarginTop}
- * {@link androidx.appcompat.R.attr#titleTextAppearance}
- * {@link androidx.appcompat.R.attr#titleTextColor}
- * {@link androidx.appcompat.R.attr#menu}
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_buttonGravity
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_collapseContentDescription
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_collapseIcon
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetEnd
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetLeft
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetRight
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetStart
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetStartWithNavigation
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetEndWithActions
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_android_gravity
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_logo
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_logoDescription
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_maxButtonHeight
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationContentDescription
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationIcon
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_popupTheme
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_subtitle
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_subtitleTextAppearance
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_subtitleTextColor
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_title
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMargin
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginBottom
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginEnd
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginStart
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginTop
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleTextAppearance
+ * @attr ref androidx.appcompat.R.styleable#Toolbar_titleTextColor
  */
 public class Toolbar extends ViewGroup {
     private static final String TAG = "Toolbar";
@@ -183,8 +180,8 @@ public class Toolbar extends ViewGroup {
     private CharSequence mTitleText;
     private CharSequence mSubtitleText;
 
-    private ColorStateList mTitleTextColor;
-    private ColorStateList mSubtitleTextColor;
+    private int mTitleTextColor;
+    private int mSubtitleTextColor;
 
     private boolean mEatingTouch;
     private boolean mEatingHover;
@@ -336,17 +333,12 @@ public class Toolbar extends ViewGroup {
         }
 
         if (a.hasValue(R.styleable.Toolbar_titleTextColor)) {
-            setTitleTextColor(a.getColorStateList(R.styleable.Toolbar_titleTextColor));
+            setTitleTextColor(a.getColor(R.styleable.Toolbar_titleTextColor, 0xffffffff));
         }
 
         if (a.hasValue(R.styleable.Toolbar_subtitleTextColor)) {
-            setSubtitleTextColor(a.getColorStateList(R.styleable.Toolbar_subtitleTextColor));
+            setSubtitleTextColor(a.getColor(R.styleable.Toolbar_subtitleTextColor, 0xffffffff));
         }
-
-        if (a.hasValue(R.styleable.Toolbar_menu)) {
-            inflateMenu(a.getResourceId(R.styleable.Toolbar_menu, 0));
-        }
-
         a.recycle();
     }
 
@@ -388,7 +380,7 @@ public class Toolbar extends ViewGroup {
      * @see #getTitleMarginTop()
      * @see #getTitleMarginEnd()
      * @see #getTitleMarginBottom()
-     * {@link androidx.appcompat.R.attr#titleMargin}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMargin
      */
     public void setTitleMargin(int start, int top, int end, int bottom) {
         mTitleMarginStart = start;
@@ -402,7 +394,7 @@ public class Toolbar extends ViewGroup {
     /**
      * @return the starting title margin in pixels
      * @see #setTitleMarginStart(int)
-     * {@link androidx.appcompat.R.attr#titleMarginStart}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginStart
      */
     public int getTitleMarginStart() {
         return mTitleMarginStart;
@@ -413,7 +405,7 @@ public class Toolbar extends ViewGroup {
      *
      * @param margin the starting title margin in pixels
      * @see #getTitleMarginStart()
-     * {@link androidx.appcompat.R.attr#titleMarginStart}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginStart
      */
     public void setTitleMarginStart(int margin) {
         mTitleMarginStart = margin;
@@ -424,7 +416,7 @@ public class Toolbar extends ViewGroup {
     /**
      * @return the top title margin in pixels
      * @see #setTitleMarginTop(int)
-     * {@link androidx.appcompat.R.attr#titleMarginTop}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginTop
      */
     public int getTitleMarginTop() {
         return mTitleMarginTop;
@@ -435,7 +427,7 @@ public class Toolbar extends ViewGroup {
      *
      * @param margin the top title margin in pixels
      * @see #getTitleMarginTop()
-     * {@link androidx.appcompat.R.attr#titleMarginTop}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginTop
      */
     public void setTitleMarginTop(int margin) {
         mTitleMarginTop = margin;
@@ -446,7 +438,7 @@ public class Toolbar extends ViewGroup {
     /**
      * @return the ending title margin in pixels
      * @see #setTitleMarginEnd(int)
-     * {@link androidx.appcompat.R.attr#titleMarginEnd}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginEnd
      */
     public int getTitleMarginEnd() {
         return mTitleMarginEnd;
@@ -457,7 +449,7 @@ public class Toolbar extends ViewGroup {
      *
      * @param margin the ending title margin in pixels
      * @see #getTitleMarginEnd()
-     * {@link androidx.appcompat.R.attr#titleMarginEnd}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginEnd
      */
     public void setTitleMarginEnd(int margin) {
         mTitleMarginEnd = margin;
@@ -468,7 +460,7 @@ public class Toolbar extends ViewGroup {
     /**
      * @return the bottom title margin in pixels
      * @see #setTitleMarginBottom(int)
-     * {@link androidx.appcompat.R.attr#titleMarginBottom}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginBottom
      */
     public int getTitleMarginBottom() {
         return mTitleMarginBottom;
@@ -479,7 +471,7 @@ public class Toolbar extends ViewGroup {
      *
      * @param margin the bottom title margin in pixels
      * @see #getTitleMarginBottom()
-     * {@link androidx.appcompat.R.attr#titleMarginBottom}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_titleMarginBottom
      */
     public void setTitleMarginBottom(int margin) {
         mTitleMarginBottom = margin;
@@ -510,7 +502,7 @@ public class Toolbar extends ViewGroup {
     }
 
     /** @hide */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public boolean canShowOverflowMenu() {
         return getVisibility() == VISIBLE && mMenuView != null && mMenuView.isOverflowReserved();
     }
@@ -526,7 +518,7 @@ public class Toolbar extends ViewGroup {
     }
 
     /** @hide */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public boolean isOverflowMenuShowPending() {
         return mMenuView != null && mMenuView.isOverflowMenuShowPending();
     }
@@ -550,7 +542,7 @@ public class Toolbar extends ViewGroup {
     }
 
     /** @hide */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public void setMenu(MenuBuilder menu, ActionMenuPresenter outerPresenter) {
         if (menu == null && mMenuView == null) {
             return;
@@ -596,7 +588,7 @@ public class Toolbar extends ViewGroup {
     }
 
     /** @hide */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public boolean isTitleTruncated() {
         if (mTitleTextView == null) {
             return false;
@@ -645,7 +637,7 @@ public class Toolbar extends ViewGroup {
      *
      * @return The current logo drawable
      * @see #setLogo(int)
-     * @see #setLogo(android.graphics.drawable.Drawable)
+     * @see #setLogo(Drawable)
      */
     public Drawable getLogo() {
         return mLogoView != null ? mLogoView.getDrawable() : null;
@@ -699,7 +691,7 @@ public class Toolbar extends ViewGroup {
      * Check whether this Toolbar is currently hosting an expanded action view.
      *
      * <p>An action view may be expanded either directly from the
-     * {@link android.view.MenuItem MenuItem} it belongs to or by user action. If the Toolbar
+     * {@link MenuItem MenuItem} it belongs to or by user action. If the Toolbar
      * has an expanded action view it can be collapsed using the {@link #collapseActionView()}
      * method.</p>
      *
@@ -715,7 +707,7 @@ public class Toolbar extends ViewGroup {
      * expanded action view this method has no effect.
      *
      * <p>An action view may be expanded either directly from the
-     * {@link android.view.MenuItem MenuItem} it belongs to or by user action.</p>
+     * {@link MenuItem MenuItem} it belongs to or by user action.</p>
      *
      * @see #hasExpandedActionView()
      */
@@ -766,7 +758,7 @@ public class Toolbar extends ViewGroup {
                 if (mTitleTextAppearance != 0) {
                     mTitleTextView.setTextAppearance(context, mTitleTextAppearance);
                 }
-                if (mTitleTextColor != null) {
+                if (mTitleTextColor != 0) {
                     mTitleTextView.setTextColor(mTitleTextColor);
                 }
             }
@@ -820,7 +812,7 @@ public class Toolbar extends ViewGroup {
                 if (mSubtitleTextAppearance != 0) {
                     mSubtitleTextView.setTextAppearance(context, mSubtitleTextAppearance);
                 }
-                if (mSubtitleTextColor != null) {
+                if (mSubtitleTextColor != 0) {
                     mSubtitleTextView.setTextColor(mSubtitleTextColor);
                 }
             }
@@ -865,15 +857,6 @@ public class Toolbar extends ViewGroup {
      * @param color The new text color in 0xAARRGGBB format
      */
     public void setTitleTextColor(@ColorInt int color) {
-        setTitleTextColor(ColorStateList.valueOf(color));
-    }
-
-    /**
-     * Sets the text color of the title, if present.
-     *
-     * @param color The new text color
-     */
-    public void setTitleTextColor(@NonNull ColorStateList color) {
         mTitleTextColor = color;
         if (mTitleTextView != null) {
             mTitleTextView.setTextColor(color);
@@ -886,15 +869,6 @@ public class Toolbar extends ViewGroup {
      * @param color The new text color in 0xAARRGGBB format
      */
     public void setSubtitleTextColor(@ColorInt int color) {
-        setSubtitleTextColor(ColorStateList.valueOf(color));
-    }
-
-    /**
-     * Sets the text color of the subtitle, if present.
-     *
-     * @param color The new text color
-     */
-    public void setSubtitleTextColor(@NonNull ColorStateList color) {
         mSubtitleTextColor = color;
         if (mSubtitleTextView != null) {
             mSubtitleTextView.setTextColor(color);
@@ -908,7 +882,7 @@ public class Toolbar extends ViewGroup {
      *
      * @return The navigation button's content description
      *
-     * {@link androidx.appcompat.R.attr#navigationContentDescription}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationContentDescription
      */
     @Nullable
     public CharSequence getNavigationContentDescription() {
@@ -923,7 +897,7 @@ public class Toolbar extends ViewGroup {
      * @param resId Resource ID of a content description string to set, or 0 to
      *              clear the description
      *
-     * {@link androidx.appcompat.R.attr#navigationContentDescription}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationContentDescription
      */
     public void setNavigationContentDescription(@StringRes int resId) {
         setNavigationContentDescription(resId != 0 ? getContext().getText(resId) : null);
@@ -937,7 +911,7 @@ public class Toolbar extends ViewGroup {
      * @param description Content description to set, or <code>null</code> to
      *                    clear the content description
      *
-     * {@link androidx.appcompat.R.attr#navigationContentDescription}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationContentDescription
      */
     public void setNavigationContentDescription(@Nullable CharSequence description) {
         if (!TextUtils.isEmpty(description)) {
@@ -960,7 +934,7 @@ public class Toolbar extends ViewGroup {
      *
      * @param resId Resource ID of a drawable to set
      *
-     * {@link androidx.appcompat.R.attr#navigationIcon}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationIcon
      */
     public void setNavigationIcon(@DrawableRes int resId) {
         setNavigationIcon(AppCompatResources.getDrawable(getContext(), resId));
@@ -978,7 +952,7 @@ public class Toolbar extends ViewGroup {
      *
      * @param icon Drawable to set, may be null to clear the icon
      *
-     * {@link androidx.appcompat.R.attr#navigationIcon}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationIcon
      */
     public void setNavigationIcon(@Nullable Drawable icon) {
         if (icon != null) {
@@ -1000,7 +974,7 @@ public class Toolbar extends ViewGroup {
      *
      * @return The navigation icon drawable
      *
-     * {@link androidx.appcompat.R.attr#navigationIcon}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_navigationIcon
      */
     @Nullable
     public Drawable getNavigationIcon() {
@@ -1014,103 +988,11 @@ public class Toolbar extends ViewGroup {
      * at the start of the toolbar. An icon must be set for the navigation button to appear.</p>
      *
      * @param listener Listener to set
-     * @see #setNavigationIcon(android.graphics.drawable.Drawable)
+     * @see #setNavigationIcon(Drawable)
      */
     public void setNavigationOnClickListener(OnClickListener listener) {
         ensureNavButtonView();
         mNavButtonView.setOnClickListener(listener);
-    }
-
-    /**
-     * Retrieve the currently configured content description for the collapse button view.
-     * This will be used to describe the collapse action to users through mechanisms such
-     * as screen readers or tooltips.
-     *
-     * @return The collapse button's content description
-     *
-     * {@link androidx.appcompat.R.attr#collapseContentDescription}
-     */
-    @Nullable
-    public CharSequence getCollapseContentDescription() {
-        return mCollapseButtonView != null ? mCollapseButtonView.getContentDescription() : null;
-    }
-
-    /**
-     * Set a content description for the collapse button if one is present. The content description
-     * will be read via screen readers or other accessibility systems to explain the action of the
-     * collapse button.
-     *
-     * @param resId Resource ID of a content description string to set, or 0 to
-     *              clear the description
-     *
-     * {@link androidx.appcompat.R.attr#collapseContentDescription}
-     */
-    public void setCollapseContentDescription(@StringRes int resId) {
-        setCollapseContentDescription(resId != 0 ? getContext().getText(resId) : null);
-    }
-
-    /**
-     * Set a content description for the collapse button if one is present. The content description
-     * will be read via screen readers or other accessibility systems to explain the action of the
-     * navigation button.
-     *
-     * @param description Content description to set, or <code>null</code> to
-     *                    clear the content description
-     *
-     * {@link androidx.appcompat.R.attr#collapseContentDescription}
-     */
-    public void setCollapseContentDescription(@Nullable CharSequence description) {
-        if (!TextUtils.isEmpty(description)) {
-            ensureCollapseButtonView();
-        }
-        if (mCollapseButtonView != null) {
-            mCollapseButtonView.setContentDescription(description);
-        }
-    }
-
-    /**
-     * Return the current drawable used as the collapse icon.
-     *
-     * @return The collapse icon drawable
-     *
-     * {@link androidx.appcompat.R.attr#collapseIcon}
-     */
-    @Nullable
-    public Drawable getCollapseIcon() {
-        return mCollapseButtonView != null ? mCollapseButtonView.getDrawable() : null;
-    }
-
-    /**
-     * Set the icon to use for the toolbar's collapse button.
-     *
-     * <p>The collapse button appears at the start of the toolbar when an action view is present
-     * .</p>
-     *
-     * @param resId Resource ID of a drawable to set
-     *
-     * {@link androidx.appcompat.R.attr#collapseIcon}
-     */
-    public void setCollapseIcon(@DrawableRes int resId) {
-        setCollapseIcon(AppCompatResources.getDrawable(getContext(), resId));
-    }
-
-    /**
-     * Set the icon to use for the toolbar's collapse button.
-     *
-     * <p>The collapse button appears at the start of the toolbar when an action view is present
-     * .</p>
-     *
-     * @param icon Drawable to set, may be null to use the default icon
-     *
-     * {@link androidx.appcompat.R.attr#collapseIcon}
-     */
-    public void setCollapseIcon(@Nullable Drawable icon) {
-        if (icon != null) {
-            ensureCollapseButtonView();
-            mCollapseButtonView.setImageDrawable(icon);
-        } else if (mCollapseButtonView != null) {
-            mCollapseButtonView.setImageDrawable(mCollapseIcon);
-        }
     }
 
     /**
@@ -1120,7 +1002,6 @@ public class Toolbar extends ViewGroup {
      * an XML menu resource, use {@link #inflateMenu(int)}.</p>
      *
      * @return The toolbar's Menu
-     * {@link androidx.appcompat.R.attr#menu}
      */
     public Menu getMenu() {
         ensureMenu();
@@ -1185,7 +1066,6 @@ public class Toolbar extends ViewGroup {
      * be modified or removed.</p>
      *
      * @param resId ID of a menu resource to inflate
-     * {@link androidx.appcompat.R.attr#menu}
      */
     public void inflateMenu(@MenuRes int resId) {
         getMenuInflater().inflate(resId, getMenu());
@@ -1218,8 +1098,8 @@ public class Toolbar extends ViewGroup {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetEnd}
-     * {@link androidx.appcompat.R.attr#contentInsetStart}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetEnd
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetStart
      */
     public void setContentInsetsRelative(int contentInsetStart, int contentInsetEnd) {
         ensureContentInsets();
@@ -1240,7 +1120,7 @@ public class Toolbar extends ViewGroup {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetStart}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetStart
      */
     public int getContentInsetStart() {
         return mContentInsets != null ? mContentInsets.getStart() : 0;
@@ -1260,7 +1140,7 @@ public class Toolbar extends ViewGroup {
      * @see #getContentInsetStart()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetEnd}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetEnd
      */
     public int getContentInsetEnd() {
         return mContentInsets != null ? mContentInsets.getEnd() : 0;
@@ -1281,8 +1161,8 @@ public class Toolbar extends ViewGroup {
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetLeft}
-     * {@link androidx.appcompat.R.attr#contentInsetRight}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetLeft
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetRight
      */
     public void setContentInsetsAbsolute(int contentInsetLeft, int contentInsetRight) {
         ensureContentInsets();
@@ -1303,7 +1183,7 @@ public class Toolbar extends ViewGroup {
      * @see #getContentInsetStart()
      * @see #getContentInsetEnd()
      * @see #getContentInsetRight()
-     * {@link androidx.appcompat.R.attr#contentInsetLeft}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetLeft
      */
     public int getContentInsetLeft() {
         return mContentInsets != null ? mContentInsets.getLeft() : 0;
@@ -1323,7 +1203,7 @@ public class Toolbar extends ViewGroup {
      * @see #getContentInsetStart()
      * @see #getContentInsetEnd()
      * @see #getContentInsetLeft()
-     * {@link androidx.appcompat.R.attr#contentInsetRight}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetRight
      */
     public int getContentInsetRight() {
         return mContentInsets != null ? mContentInsets.getRight() : 0;
@@ -1339,7 +1219,7 @@ public class Toolbar extends ViewGroup {
      * @return the start content inset used when a navigation icon has been set in pixels
      *
      * @see #setContentInsetStartWithNavigation(int)
-     * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetStartWithNavigation
      */
     public int getContentInsetStartWithNavigation() {
         return mContentInsetStartWithNavigation != RtlSpacingHelper.UNDEFINED
@@ -1358,7 +1238,7 @@ public class Toolbar extends ViewGroup {
      *                                 in pixels
      *
      * @see #getContentInsetStartWithNavigation()
-     * {@link androidx.appcompat.R.attr#contentInsetStartWithNavigation}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetStartWithNavigation
      */
     public void setContentInsetStartWithNavigation(int insetStartWithNavigation) {
         if (insetStartWithNavigation < 0) {
@@ -1382,7 +1262,7 @@ public class Toolbar extends ViewGroup {
      * @return the end content inset used when a menu has been set in pixels
      *
      * @see #setContentInsetEndWithActions(int)
-     * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetEndWithActions
      */
     public int getContentInsetEndWithActions() {
         return mContentInsetEndWithActions != RtlSpacingHelper.UNDEFINED
@@ -1400,7 +1280,7 @@ public class Toolbar extends ViewGroup {
      * @param insetEndWithActions the inset to use when a menu has been set in pixels
      *
      * @see #getContentInsetEndWithActions()
-     * {@link androidx.appcompat.R.attr#contentInsetEndWithActions}
+     * @attr ref androidx.appcompat.R.styleable#Toolbar_contentInsetEndWithActions
      */
     public void setContentInsetEndWithActions(int insetEndWithActions) {
         if (insetEndWithActions < 0) {
@@ -2226,7 +2106,7 @@ public class Toolbar extends ViewGroup {
     }
 
     /** @hide */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public DecorToolbar getWrapper() {
         if (mWrapper == null) {
             mWrapper = new ToolbarWidgetWrapper(this, true);
@@ -2265,7 +2145,7 @@ public class Toolbar extends ViewGroup {
      * it could be considered "empty" (no visible elements with nonzero measured size)
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public void setCollapsible(boolean collapsible) {
         mCollapsible = collapsible;
         requestLayout();
@@ -2275,7 +2155,7 @@ public class Toolbar extends ViewGroup {
      * Must be called before the menu is accessed
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public void setMenuCallbacks(MenuPresenter.Callback pcb, MenuBuilder.Callback mcb) {
         mActionMenuPresenterCallback = pcb;
         mMenuBuilderCallback = mcb;
@@ -2288,24 +2168,6 @@ public class Toolbar extends ViewGroup {
         if (mContentInsets == null) {
             mContentInsets = new RtlSpacingHelper();
         }
-    }
-
-    /**
-     * @hide
-     */
-    @RestrictTo(TESTS)
-    @Nullable
-    final TextView getTitleTextView() {
-        return mTitleTextView;
-    }
-
-    /**
-     * @hide
-     */
-    @RestrictTo(TESTS)
-    @Nullable
-    final TextView getSubtitleTextView() {
-        return mSubtitleTextView;
     }
 
     /**

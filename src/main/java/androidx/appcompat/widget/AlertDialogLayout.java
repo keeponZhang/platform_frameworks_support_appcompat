@@ -16,7 +16,7 @@
 
 package androidx.appcompat.widget;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -48,7 +48,7 @@ import androidx.core.view.ViewCompat;
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class AlertDialogLayout extends LinearLayoutCompat {
 
     public AlertDialogLayout(@Nullable Context context) {
@@ -305,8 +305,8 @@ public class AlertDialogLayout extends LinearLayoutCompat {
                 final int childWidth = child.getMeasuredWidth();
                 final int childHeight = child.getMeasuredHeight();
 
-                final LinearLayoutCompat.LayoutParams lp =
-                        (LinearLayoutCompat.LayoutParams) child.getLayoutParams();
+                final LayoutParams lp =
+                        (LayoutParams) child.getLayoutParams();
 
                 int layoutGravity = lp.gravity;
                 if (layoutGravity < 0) {

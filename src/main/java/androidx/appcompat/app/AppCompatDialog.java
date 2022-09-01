@@ -16,7 +16,7 @@
 
 package androidx.appcompat.app;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -35,7 +35,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.core.view.KeyEventDispatcher;
 
 /**
- * Base class for AppCompat themed {@link android.app.Dialog}s.
+ * Base class for AppCompat themed {@link Dialog}s.
  */
 public class AppCompatDialog extends Dialog implements AppCompatCallback {
 
@@ -56,15 +56,14 @@ public class AppCompatDialog extends Dialog implements AppCompatCallback {
     public AppCompatDialog(Context context, int theme) {
         super(context, getThemeResId(context, theme));
 
-        final AppCompatDelegate delegate = getDelegate();
-        // Make sure we provide the delegate with the current theme res id
-        delegate.setTheme(getThemeResId(context, theme));
-
         // This is a bit weird, but Dialog's are typically created and setup before being shown,
         // which means that we can't rely on onCreate() being called before a content view is set.
         // To workaround this, we call onCreate(null) in the ctor, and then again as usual in
         // onCreate().
-        delegate.onCreate(null);
+        getDelegate().onCreate(null);
+
+        // Apply AppCompat's DayNight resources if needed
+        getDelegate().applyDayNight();
     }
 
     protected AppCompatDialog(Context context, boolean cancelable,
@@ -80,7 +79,7 @@ public class AppCompatDialog extends Dialog implements AppCompatCallback {
     }
 
     /**
-     * Support library version of {@link android.app.Dialog#getActionBar}.
+     * Support library version of {@link Dialog#getActionBar}.
      *
      * <p>Retrieve a reference to this dialog's ActionBar.
      *
@@ -146,7 +145,7 @@ public class AppCompatDialog extends Dialog implements AppCompatCallback {
      *                  {@link androidx.core.view.WindowCompat}.
      * @return Returns true if the requested feature is supported and now enabled.
      *
-     * @see android.app.Dialog#requestWindowFeature
+     * @see Dialog#requestWindowFeature
      * @see android.view.Window#requestFeature
      */
     public boolean supportRequestWindowFeature(int featureId) {
@@ -157,7 +156,7 @@ public class AppCompatDialog extends Dialog implements AppCompatCallback {
      * @hide
      */
     @Override
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public void invalidateOptionsMenu() {
         getDelegate().invalidateOptionsMenu();
     }

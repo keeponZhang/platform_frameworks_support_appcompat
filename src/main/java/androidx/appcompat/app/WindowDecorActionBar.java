@@ -16,7 +16,7 @@
 
 package androidx.appcompat.app;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP_PREFIX;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -76,7 +76,7 @@ import java.util.ArrayList;
  *
  * @hide
  */
-@RestrictTo(LIBRARY_GROUP_PREFIX)
+@RestrictTo(LIBRARY_GROUP)
 public class WindowDecorActionBar extends ActionBar implements
         ActionBarOverlayLayout.ActionBarVisibilityCallback {
     private static final String TAG = "WindowDecorActionBar";
@@ -185,7 +185,7 @@ public class WindowDecorActionBar extends ActionBar implements
      * Only for edit mode.
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public WindowDecorActionBar(View layout) {
         assert layout.isInEditMode();
         init(layout);
@@ -542,7 +542,7 @@ public class WindowDecorActionBar extends ActionBar implements
 
     private void configureTab(Tab tab, int position) {
         final TabImpl tabi = (TabImpl) tab;
-        final ActionBar.TabListener callback = tabi.getCallback();
+        final TabListener callback = tabi.getCallback();
 
         if (callback == null) {
             throw new IllegalStateException("Action Bar Tab must have a Callback");
@@ -982,15 +982,15 @@ public class WindowDecorActionBar extends ActionBar implements
     /**
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
+    @RestrictTo(LIBRARY_GROUP)
     public class ActionModeImpl extends ActionMode implements MenuBuilder.Callback {
         private final Context mActionModeContext;
         private final MenuBuilder mMenu;
 
-        private ActionMode.Callback mCallback;
+        private Callback mCallback;
         private WeakReference<View> mCustomView;
 
-        public ActionModeImpl(Context context, ActionMode.Callback callback) {
+        public ActionModeImpl(Context context, Callback callback) {
             mActionModeContext = context;
             mCallback = callback;
             mMenu = new MenuBuilder(context)
@@ -1158,9 +1158,9 @@ public class WindowDecorActionBar extends ActionBar implements
     /**
      * @hide
      */
-    @RestrictTo(LIBRARY_GROUP_PREFIX)
-    public class TabImpl extends ActionBar.Tab {
-        private ActionBar.TabListener mCallback;
+    @RestrictTo(LIBRARY_GROUP)
+    public class TabImpl extends Tab {
+        private TabListener mCallback;
         private Object mTag;
         private Drawable mIcon;
         private CharSequence mText;
@@ -1179,12 +1179,12 @@ public class WindowDecorActionBar extends ActionBar implements
             return this;
         }
 
-        public ActionBar.TabListener getCallback() {
+        public TabListener getCallback() {
             return mCallback;
         }
 
         @Override
-        public Tab setTabListener(ActionBar.TabListener callback) {
+        public Tab setTabListener(TabListener callback) {
             mCallback = callback;
             return this;
         }

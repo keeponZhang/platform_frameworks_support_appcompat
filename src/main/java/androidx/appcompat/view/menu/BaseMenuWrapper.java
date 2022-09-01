@@ -27,14 +27,15 @@ import androidx.core.internal.view.SupportSubMenu;
 import java.util.Iterator;
 import java.util.Map;
 
-abstract class BaseMenuWrapper {
+abstract class BaseMenuWrapper<T> extends BaseWrapper<T> {
 
     final Context mContext;
 
     private Map<SupportMenuItem, MenuItem> mMenuItems;
     private Map<SupportSubMenu, SubMenu> mSubMenus;
 
-    BaseMenuWrapper(Context context) {
+    BaseMenuWrapper(Context context, T object) {
+        super(object);
         mContext = context;
     }
 
@@ -52,7 +53,7 @@ abstract class BaseMenuWrapper {
 
             if (null == wrappedItem) {
                 // ... if not, create one and add it to our map
-                wrappedItem = new MenuItemWrapperICS(mContext, supportMenuItem);
+                wrappedItem = MenuWrapperFactory.wrapSupportMenuItem(mContext, supportMenuItem);
                 mMenuItems.put(supportMenuItem, wrappedItem);
             }
 
@@ -73,7 +74,7 @@ abstract class BaseMenuWrapper {
             SubMenu wrappedMenu = mSubMenus.get(supportSubMenu);
 
             if (null == wrappedMenu) {
-                wrappedMenu = new SubMenuWrapperICS(mContext, supportSubMenu);
+                wrappedMenu = MenuWrapperFactory.wrapSupportSubMenu(mContext, supportSubMenu);
                 mSubMenus.put(supportSubMenu, wrappedMenu);
             }
             return wrappedMenu;
@@ -97,7 +98,7 @@ abstract class BaseMenuWrapper {
         }
 
         Iterator<SupportMenuItem> iterator = mMenuItems.keySet().iterator();
-        android.view.MenuItem menuItem;
+        MenuItem menuItem;
 
         while (iterator.hasNext()) {
             menuItem = iterator.next();
@@ -113,7 +114,7 @@ abstract class BaseMenuWrapper {
         }
 
         Iterator<SupportMenuItem> iterator = mMenuItems.keySet().iterator();
-        android.view.MenuItem menuItem;
+        MenuItem menuItem;
 
         while (iterator.hasNext()) {
             menuItem = iterator.next();
